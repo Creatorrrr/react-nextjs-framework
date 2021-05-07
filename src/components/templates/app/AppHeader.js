@@ -2,6 +2,7 @@ import React from "react";
 import Header from "components/commons/layout/Header";
 import { Button, FormControl, IconButton, makeStyles, MenuItem, Select } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
+import { useTranslation } from "react-i18next";
 
 console.debug("AppHeader.js");
 
@@ -19,6 +20,7 @@ const useStyles = makeStyles({
 
 export default function AppHeader({ onTitleClick, onLogoutClick, language, onLanguageChange }) {
   const classes = useStyles();
+  const { t } = useTranslation("appHeader");
 
   return (
     <Header title={"리액트 프레임워크"} onTitleClick={onTitleClick}>
@@ -29,7 +31,7 @@ export default function AppHeader({ onTitleClick, onLogoutClick, language, onLan
         </Select>
       </FormControl>
       <Button onClick={onLogoutClick} style={{ color: "white" }}>
-        로그아웃
+        {t("LOGOUT")}
       </Button>
       <IconButton color="inherit">
         <AccountCircle />

@@ -4,6 +4,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import AppHeaderContainer from "components/containers/app/AppHeaderContainer";
 import AppSidebarContainer from "components/containers/app/AppSidebarContainer";
 import Main from "components/commons/layout/Main";
+import "ag-grid-community/dist/styles/ag-grid.css";
+import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 console.debug("App.js");
 
@@ -12,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
 }));
-
+  
 export default function App({ children }) {
   const classes = useStyles();
 
