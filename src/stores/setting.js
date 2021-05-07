@@ -11,6 +11,10 @@ export const slice = createSlice({
   name: "setting",
   initialState,
   reducers: {
+    HYDRATE: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
     setSidebarWidth: (state, action) => ({
       ...state,
       sidebarWidth: action.payload,
