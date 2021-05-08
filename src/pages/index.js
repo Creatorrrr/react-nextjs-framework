@@ -6,10 +6,13 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import locales from "locales";
 import SnackbarAlert from "components/commons/snackbar/SnackbarAlert";
-import App from "components/templates/app/App";
 import { IS_DEV } from "constants/global-constants";
 import "@fontsource/roboto";
 import "@fontsource/noto-sans-kr";
+import AppContainer from "components/containers/app/AppContainer";
+import { BrowserRouter, StaticRouter } from "react-router-dom";
+import { useRouter } from "next/router";
+const isServer = typeof window === "undefined";
 
 i18n
   .use(LanguageDetector)
@@ -30,6 +33,7 @@ const theme = createMuiTheme({
 });
 
 export default function Home() {
+  const router = useRouter();
   return (
     <ThemeProvider theme={theme}>
       <SnackbarProvider
@@ -42,7 +46,15 @@ export default function Home() {
           </SnackbarAlert>
         )}
       >
-        <App />
+        {isServer ? (
+          <StaticRouter location={router.asPath}>
+            <AppContainer />
+          </StaticRouter>
+        ) : (
+          <BrowserRouter>
+            <AppContainer />
+          </BrowserRouter>
+        )}
       </SnackbarProvider>
     </ThemeProvider>
   );
