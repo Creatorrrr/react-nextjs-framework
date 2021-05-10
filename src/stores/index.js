@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import { persistReducer } from "redux-persist";
@@ -6,7 +6,6 @@ import storage from "redux-persist/lib/storage";
 import storageSession from "redux-persist/lib/storage/session";
 import { persistStore } from "redux-persist";
 import logger from "redux-logger";
-import { composeWithDevTools } from "redux-devtools-extension";
 import { IS_DEV } from "constants/global-constants";
 import setting from "./setting";
 import session from "./session";
@@ -46,7 +45,7 @@ const makeStore = () => {
     middleware: [...middlewares],
     devTools: IS_DEV,
   });
-  store.__persistor = persistStore(store);
+  store.persistor = persistStore(store);
   
   return store;
 };
