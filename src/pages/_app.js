@@ -1,4 +1,4 @@
-// import "react-app-polyfill/ie11";
+import "react-app-polyfill/ie11";
 import Head from "next/head";
 import { Fragment } from "react";
 import { createMuiTheme } from "@material-ui/core";
@@ -14,7 +14,7 @@ import SnackbarAlert from "components/commons/snackbar/SnackbarAlert";
 import NextReduxWrapper from "stores";
 import { IS_DEV } from "constants/global-constants";
 import "@fontsource/roboto";
-import "@fontsource/noto-sans-kr";
+// import "@fontsource/noto-sans-kr";
 
 i18n
   .use(LanguageDetector)
@@ -43,22 +43,22 @@ function MyApp({ Component, pageProps }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <PersistGate persistor={store.persistor} loading={<div>Loading</div>}>
-        <ThemeProvider theme={theme}>
-          <SnackbarProvider
-            maxSnack={3}
-            autoHideDuration={2000}
-            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-            content={(key, options) => (
-              <SnackbarAlert snackbarKey={key} severity={options.severity} title={options.title}>
-                {options.message}
-              </SnackbarAlert>
-            )}
-          >
-            <Component {...pageProps} />
-          </SnackbarProvider>
-        </ThemeProvider>
-      </PersistGate>
+      {/* <PersistGate persistor={store.persistor} loading={<div>Loading</div>}> */}
+      <ThemeProvider theme={theme}>
+        <SnackbarProvider
+          maxSnack={3}
+          autoHideDuration={2000}
+          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          content={(key, options) => (
+            <SnackbarAlert snackbarKey={key} severity={options.severity} title={options.title}>
+              {options.message}
+            </SnackbarAlert>
+          )}
+        >
+          <Component {...pageProps} />
+        </SnackbarProvider>
+      </ThemeProvider>
+      {/* </PersistGate> */}
     </Fragment>
   );
 }

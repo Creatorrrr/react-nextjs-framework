@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HttpStatus } from "constants/http-constants";
 import UserApi from "apis/user-api";
 import LoginForm from "components/templates/login/LoginForm";
@@ -14,9 +14,16 @@ export default function LoginFormContainer() {
   const router = useRouter();
   const dispatcher = useDispatch();
 
-  const [loginId, setLoginId] = useState(CommonUtil.getLocalStorageItem("loginId", ""));
+  const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
-  const [keepLoginId, setKeepLoginId] = useState(CommonUtil.getLocalStorageItem("keepLoginId", false));
+  const [keepLoginId, setKeepLoginId] = useState(false);
+
+  useEffect(() => {
+    const localStorageLoginId = CommonUtil.getLocalStorageItem("loginId", "");
+    const localStorageKeepLoginId = CommonUtil.getLocalStorageItem("keepLoginId", false);
+    if (!loginId) setLoginId(localStorageLoginId);
+    if (!keepLoginId) setKeepLoginId(localStorageKeepLoginId);
+  });
 
   /**
    * 로그인
@@ -44,7 +51,7 @@ export default function LoginFormContainer() {
           localStorage.keepLoginId = false;
           localStorage.loginId = "";
         }
-        router.replace("/");
+        router.replace("/aggrid");
       }
     } catch (e) {
       console.error(e);
