@@ -14,7 +14,7 @@ import SnackbarAlert from "components/commons/snackbar/SnackbarAlert";
 import NextReduxWrapper from "stores";
 import { IS_DEV } from "constants/global-constants";
 import "@fontsource/roboto";
-// import "@fontsource/noto-sans-kr";
+import "@fontsource/noto-sans-kr";
 
 i18n
   .use(LanguageDetector)
@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      {/* <PersistGate persistor={store.persistor} loading={<div>Loading</div>}> */}
+      <PersistGate persistor={store.persistor} loading={<div>Loading</div>}>
       <ThemeProvider theme={theme}>
         <SnackbarProvider
           maxSnack={3}
@@ -58,7 +58,7 @@ function MyApp({ Component, pageProps }) {
           <Component {...pageProps} />
         </SnackbarProvider>
       </ThemeProvider>
-      {/* </PersistGate> */}
+      </PersistGate>
     </Fragment>
   );
 }
