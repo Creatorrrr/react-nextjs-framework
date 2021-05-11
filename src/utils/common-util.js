@@ -2,6 +2,13 @@ console.debug("common-util.js");
 
 const CommonUtil = {
   /**
+   * 로컬 스토리지에 데이터 저장하기
+   */
+  setLocalStorageItem: (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  },
+
+  /**
    * 로컬 스토리지에 저장된 데이터 불러오기
    */
   getLocalStorageItem: (key, defaultValue) => {
@@ -11,6 +18,13 @@ const CommonUtil = {
     } catch (error) {
       return item || defaultValue;
     }
+  },
+
+  /**
+   * 세션 스토리지에 데이터 저장하기
+   */
+  setSessionStorageItem: (key, value) => {
+    sessionStorage.setItem(key, JSON.stringify(value));
   },
 
   /**

@@ -10,6 +10,8 @@ import TreeSampleContainer from "components/containers/tree/TreeSampleContainer"
 import RcTreeSampleContainer from "components/containers/rctree/RcTreeSampleContainer";
 import UtilSampleContainer from "components/containers/util/UtilSampleContainer";
 
+console.log("[pagename]/index.js");
+
 export default function MainPage() {
   const router = useRouter();
   const { pagename } = router.query;

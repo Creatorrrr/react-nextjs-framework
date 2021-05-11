@@ -1,21 +1,25 @@
 import { useState } from "react";
-import AgGridSample from "components/templates/aggrid/AgGridSample";
 import NodeApi from "apis/node-api";
+import AgGridSample from "components/templates/aggrid/AgGridSample";
 import Async from "components/commons/async/Async";
 import { HttpStatus } from "constants/http-constants";
 import SnackbarMessage from "components/commons/snackbar/SnackbarMessage";
-import { useSelector } from "react-redux";
 import CommonUtil from "utils/common-util";
 import CenterCircularProgress from "components/commons/progress/CenterCircularProgress";
+import { useEffect } from "react";
 
 console.debug("AgGridSampleContainer.js");
 
 export default function AgGridSampleContainer() {
-  const user = useSelector((state) => state.session.user);
-  const [nodeId, setNodeId] = useState(user.group.nodeId);
+  const [nodeId, setNodeId] = useState(null);
 
   const setGridApi = useState(null)[1];
   const setGridColumnApi = useState(null)[1];
+
+  useEffect(() => {
+    const user = CommonUtil.getSessionStorageItem("user", null);
+    if (user && !nodeId) setNodeId(user.group.nodeId);
+  });
 
   /**
    *  그리드 초기화 이벤트

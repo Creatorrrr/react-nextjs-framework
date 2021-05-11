@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { setUser } from "stores/session";
 import { useRouter } from "next/router";
 
-
 console.debug("LoginFormContainer.js");
 
 export default function LoginFormContainer() {
@@ -42,6 +41,7 @@ export default function LoginFormContainer() {
         // session store에 사용자 정보 저장
         const user = response.data.result;
         dispatcher(setUser(user));
+        CommonUtil.setSessionStorageItem("user", user);
 
         // 로그인 아이디와 저장여부 저장
         if (keepLoginId && loginId) {

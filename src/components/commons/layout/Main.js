@@ -15,9 +15,9 @@ export default function Main({ marginTop, children }) {
   const classes = useStyles();
 
   return (
-    <main className={classes.content}>
+    <div className={classes.content}>
       <Toolbar style={{ height: marginTop }} />
       {children}
-    </main>
+    </div>
   );
 }

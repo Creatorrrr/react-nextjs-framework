@@ -1,6 +1,11 @@
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
-module.exports = {
+const withTM = require("next-transpile-modules")(["react-async"]);
+
+module.exports = withTM({
+  future: {
+    webpack5: true,
+  },
   async rewrites() {
     return [
       {
@@ -18,4 +23,4 @@ module.exports = {
       },
     ];
   },
-};
+});

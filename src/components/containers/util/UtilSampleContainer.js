@@ -73,8 +73,8 @@ export default function UtilSampleContainer() {
         <TextField size="small" type="number" label="파일 사이즈 Bytes" variant="outlined" value={fileSize} onChange={changeFileSize} />
       </div>
       <div>파일 사이즈: {filesize(fileSize)}</div>
-      {/* <Divider className={styles.divider} />
-      <div>
+      <Divider className={styles.divider} />
+      {/* <div>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker disableToolbar variant="inline" format="MM/dd/yyyy" margin="normal" label="날짜 선택" value={date} onChange={changeDate} />
         </MuiPickersUtilsProvider>
