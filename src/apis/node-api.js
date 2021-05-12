@@ -25,9 +25,10 @@ const NodeApi = {
       },
     });
   },
-  async getNodeChildren(params) {
+  async getNodeChildren(params, headers) {
     return await httpUtil.get({
       url: `/api/nodes/${encodeURIComponent(params.nodeId)}/children`,
+      headers,
       params: {
         nodeId: params.nodeId,
         rootNodeId: params.rootNodeId,

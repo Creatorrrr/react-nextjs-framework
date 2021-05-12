@@ -12,8 +12,8 @@ const HttpUtil = {
       url: PREFIX_URL + params.url,
       timeout: params.timeout || HTTP_TIMEOUT,
       headers: {
-        ...params.headers,
         Authorization: token || "",
+        ...params.headers,
       },
     };
 

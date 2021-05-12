@@ -20,6 +20,7 @@
     "ag-grid-community": "^25.2.1",
     "ag-grid-react": "^25.2.0",
     "axios": "^0.21.1",
+    "cookie": "^0.4.1",
     "crypto-js": "^4.0.0",
     "date-fns": "^2.21.3",
     "filesize": "^6.3.0",

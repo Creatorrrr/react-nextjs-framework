@@ -9,9 +9,9 @@ const prefixUrl =
 export const PREFIX_URL = prefixUrl;
 
 // HTTP 타임아웃
-export const HTTP_TIMEOUT = process.env.NEXT_PUBLIC_HTTP_TIMEOUT;
+export const HTTP_TIMEOUT = parseInt(process.env.NEXT_PUBLIC_HTTP_TIMEOUT);
 // 파일 전송 타임아웃
-export const FILE_TIMEOUT = process.env.NEXT_PUBLIC_FILE_TIMEOUT;
+export const FILE_TIMEOUT = parseInt(process.env.NEXT_PUBLIC_FILE_TIMEOUT);
 
 // 상태코드
 export const HttpStatus = {
