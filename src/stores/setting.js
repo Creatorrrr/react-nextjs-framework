@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 
 console.debug("setting.js");
 
@@ -11,7 +12,7 @@ export const slice = createSlice({
   name: "setting",
   initialState,
   reducers: {
-    HYDRATE: (state, action) => ({
+    [HYDRATE]: (state, action) => ({
       ...state,
       ...action.payload,
     }),

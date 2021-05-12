@@ -12,7 +12,7 @@ export const slice = createSlice({
   name: "session",
   initialState,
   reducers: {
-    HYDRATE: (state, action) => ({
+    [HYDRATE]: (state, action) => ({
       ...state,
       ...action.payload,
     }),

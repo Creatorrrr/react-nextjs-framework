@@ -35,13 +35,12 @@ export default function LoginFormContainer() {
       });
 
       if (HttpStatus.OK === response.data.status) {
-        // session에 토큰값 저장
-        sessionStorage.token = response.data.result.token;
+        // 쿠키에  토큰값 저장
+        CommonUtil.setCookie("token", response.data.result.token);
 
         // session store에 사용자 정보 저장
         const user = response.data.result;
         dispatcher(setUser(user));
-        CommonUtil.setSessionStorageItem("user", user);
 
         // 로그인 아이디와 저장여부 저장
         if (keepLoginId && loginId) {

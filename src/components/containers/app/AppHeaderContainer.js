@@ -1,11 +1,12 @@
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { setUser } from "stores/session";
-import "ag-grid-community/dist/styles/ag-grid.css";
-import "ag-grid-community/dist/styles/ag-theme-alpine.css";
-import AppHeader from "components/templates/app/AppHeader";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { setUser } from "stores/session";
+import AppHeader from "components/templates/app/AppHeader";
+import CommonUtil from "utils/common-util";
+import "ag-grid-community/dist/styles/ag-grid.css";
+import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 console.debug("AppHeaderContainer.js");
 
@@ -13,7 +14,7 @@ export default function AppHeaderContainer() {
   const router = useRouter();
   const dispatcher = useDispatch();
   const { i18n } = useTranslation();
-  
+
   const [language, setLanguage] = useState(i18n.language);
 
   /**
@@ -28,6 +29,7 @@ export default function AppHeaderContainer() {
    */
   const logout = () => {
     dispatcher(setUser(null));
+    CommonUtil.setSessionStorageItem("user", null);
     router.replace("/login");
   };
 

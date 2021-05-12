@@ -1,17 +1,19 @@
 import axios from "axios";
+import CommonUtil from "./common-util";
 import { PREFIX_URL, HTTP_TIMEOUT } from "constants/http-constants";
 
 console.debug("http-util.js");
 
 const HttpUtil = {
   async send(params) {
+    const token = CommonUtil.getCookie("token");
     const options = {
       ...params,
       url: PREFIX_URL + params.url,
       timeout: params.timeout || HTTP_TIMEOUT,
       headers: {
         ...params.headers,
-        Authorization: sessionStorage.token || "",
+        Authorization: token || "",
       },
     };
 
