@@ -15,13 +15,6 @@ export default function AppSidebarContainer() {
   };
 
   /**
-   * DataGrid 페이지로 이동
-   */
-  const goDataGridPage = () => {
-    router.push("/datagrid");
-  };
-
-  /**
    * Snackbar 페이지로 이동
    */
   const goSnackbarPage = () => {
@@ -59,7 +52,6 @@ export default function AppSidebarContainer() {
   return (
     <AppSidebar
       onAgGridClick={goAgGridPage}
-      onDataGridClick={goDataGridPage}
       onSnackbarClick={goSnackbarPage}
       onDialogClick={goDialogPage}
       onTreeClick={goTreePage}

@@ -70,7 +70,7 @@ export default function MainPage({ unauthorized, nodeList }) {
   return !unauthorized ? (
     <Fragment>
       <Head>
-        <title>React App</title>
+        <title>AgGridSample</title>
       </Head>
       <AppContainer>
         <AgGridSampleContainer nodeList={nodeList} />
