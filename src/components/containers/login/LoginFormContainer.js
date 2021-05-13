@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HttpStatus } from "constants/http-constants";
-import UserApi from "apis/user-api";
+import LoginApi from "apis/login-api";
 import LoginForm from "components/templates/login/LoginForm";
 import CommonUtil from "utils/common-util";
 import { useDispatch } from "react-redux";
@@ -29,7 +29,7 @@ export default function LoginFormContainer() {
    */
   const login = async () => {
     try {
-      const response = await UserApi.login({
+      const response = await LoginApi.login({
         loginId: loginId,
         pwd: password,
       });

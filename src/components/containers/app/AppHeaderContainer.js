@@ -29,7 +29,7 @@ export default function AppHeaderContainer() {
    */
   const logout = () => {
     dispatcher(setUser(null));
-    CommonUtil.setSessionStorageItem("user", null);
+    CommonUtil.removeCookie("token");
     router.replace("/login");
   };
 

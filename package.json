@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start"
   },
@@ -21,6 +21,7 @@
     "ag-grid-react": "^25.2.0",
     "axios": "^0.21.1",
     "cookie": "^0.4.1",
+    "cross-env": "^7.0.3",
     "crypto-js": "^4.0.0",
     "date-fns": "^2.21.3",
     "filesize": "^6.3.0",

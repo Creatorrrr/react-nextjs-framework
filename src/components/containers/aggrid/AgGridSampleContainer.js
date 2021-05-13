@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import NodeApi from "apis/node-api";
 import AgGridSample from "components/templates/aggrid/AgGridSample";
 import Async from "components/commons/async/Async";
@@ -10,9 +9,8 @@ import CenterCircularProgress from "components/commons/progress/CenterCircularPr
 
 console.debug("AgGridSampleContainer.js");
 
-export default function AgGridSampleContainer() {
-  const user = useSelector((state) => state.session.user);
-  const [nodeId, setNodeId] = useState(user.group.nodeId);
+export default function AgGridSampleContainer({ nodeList }) {
+  const [nodeId, setNodeId] = useState(null);
 
   const setGridApi = useState(null)[1];
   const setGridColumnApi = useState(null)[1];
@@ -72,6 +70,6 @@ export default function AgGridSampleContainer() {
       onLoading={() => <CenterCircularProgress />}
     />
   ) : (
-    <CenterCircularProgress />
+    <AgGridSample onGridReady={onGridReady} rowData={nodeList} onNameClick={changeNodeId} />
   );
 }
