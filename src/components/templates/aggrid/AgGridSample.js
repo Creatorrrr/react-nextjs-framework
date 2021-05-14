@@ -1,7 +1,7 @@
 import { AgGridReact } from "ag-grid-react/lib/agGridReact";
 import { AgGridColumn } from "ag-grid-react/lib/agGridColumn";
 import "ag-grid-community/dist/styles/ag-grid.css";
-import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
 console.debug("AgGridSample.js");
 
@@ -56,7 +56,7 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
   ];
 
   return (
-    <div className="ag-theme-alpine" style={{ height: 400 }}>
+    <div className="ag-theme-balham" style={{ height: '100%' }}>
       <AgGridReact defaultColDef={defaultColDef} onGridReady={onGridReady} rowData={rowData}>
         {columnDefs.map((columnDef, index) => (
           <AgGridColumn key={index} {...columnDef}></AgGridColumn>
