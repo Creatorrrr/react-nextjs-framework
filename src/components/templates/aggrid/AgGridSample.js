@@ -56,7 +56,7 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
   ];
 
   return (
-    <div className="ag-theme-balham" style={{ height: '100%' }}>
+    <div className="ag-theme-balham" style={{ height: 400 }}>
       <AgGridReact defaultColDef={defaultColDef} onGridReady={onGridReady} rowData={rowData}>
         {columnDefs.map((columnDef, index) => (
           <AgGridColumn key={index} {...columnDef}></AgGridColumn>
