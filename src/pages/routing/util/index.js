@@ -1,18 +1,21 @@
 import { Fragment } from "react";
 import Head from "next/head";
 import AppContainer from "components/containers/app/AppContainer";
+import RoutingSample from "components/templates/routing/RoutingSample";
 import UtilSampleContainer from "components/containers/util/UtilSampleContainer";
 
-console.log("pages/util.js");
+console.log("pages/routing/util/index.js");
 
-export default function Util() {
+export default function RoutingUtil() {
   return (
     <Fragment>
       <Head>
-        <title>UtilSample</title>
+        <title>RoutingUtilSample</title>
       </Head>
       <AppContainer>
-        <UtilSampleContainer />
+        <RoutingSample>
+          <UtilSampleContainer />
+        </RoutingSample>
       </AppContainer>
     </Fragment>
   );

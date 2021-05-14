@@ -1,13 +1,12 @@
 import React from "react";
-import Sidebar from "components/commons/layout/Sidebar";
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import { MoveToInbox, Mail, AccountTree } from "@material-ui/icons";
 
-console.debug("AppSidebar.js");
+console.debug("RoutingSidebar.js");
 
-export default function AppSidebar({ onAgGridClick, onSnackbarClick, onDialogClick, onTreeClick, onRcTreeClick, onUtilClick, onRoutingClick }) {
+export default function RoutingSidebar({ onAgGridClick, onSnackbarClick, onDialogClick, onTreeClick, onRcTreeClick, onUtilClick }) {
   return (
-    <Sidebar>
+    <div style={{ width: 200 }}>
       <List>
         <ListItem button onClick={onAgGridClick}>
           <ListItemIcon>
@@ -45,13 +44,7 @@ export default function AppSidebar({ onAgGridClick, onSnackbarClick, onDialogCli
           </ListItemIcon>
           <ListItemText>Util</ListItemText>
         </ListItem>
-        <ListItem button onClick={onRoutingClick}>
-          <ListItemIcon>
-            <AccountTree />
-          </ListItemIcon>
-          <ListItemText>Routing</ListItemText>
-        </ListItem>
       </List>
-    </Sidebar>
+    </div>
   );
 }

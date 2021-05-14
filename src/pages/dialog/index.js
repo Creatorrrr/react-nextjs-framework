@@ -1,18 +1,18 @@
 import { Fragment } from "react";
 import Head from "next/head";
 import AppContainer from "components/containers/app/AppContainer";
-import RcTreeSampleContainer from "components/containers/rctree/RcTreeSampleContainer";
+import DialogSampleContainer from "components/containers/dialog/DialogSampleContainer";
 
-console.log("pages/rctree.js");
+console.log("pages/dialog/index.js");
 
-export default function RcTree() {
+export default function Dialog() {
   return (
     <Fragment>
       <Head>
-        <title>RcTreeSample</title>
+        <title>DialogSample</title>
       </Head>
       <AppContainer>
-        <RcTreeSampleContainer />
+        <DialogSampleContainer />
       </AppContainer>
     </Fragment>
   );

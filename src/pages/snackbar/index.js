@@ -1,18 +1,18 @@
 import { Fragment } from "react";
 import Head from "next/head";
 import AppContainer from "components/containers/app/AppContainer";
-import DialogSampleContainer from "components/containers/dialog/DialogSampleContainer";
+import SnackbarSampleContainer from "components/containers/snackbar/SnackbarSampleContainer";
 
-console.log("pages/dialog.js");
+console.log("pages/snackbar/index.js");
 
-export default function Dialog() {
+export default function Snackbar() {
   return (
     <Fragment>
       <Head>
-        <title>DialogSample</title>
+        <title>SnackbarSample</title>
       </Head>
       <AppContainer>
-        <DialogSampleContainer />
+        <SnackbarSampleContainer />
       </AppContainer>
     </Fragment>
   );

@@ -9,7 +9,7 @@ import LoginApi from "apis/login-api";
 import CommonUtil from "utils/common-util";
 import CenterCircularProgress from "components/commons/progress/CenterCircularProgress";
 
-console.log("pages/aggrid.js");
+console.log("pages/aggrid/index.js");
 
 export async function getServerSideProps({ req }) {
   const parsedCookie = cookie.parse(req.headers.cookie || "");

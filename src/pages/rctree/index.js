@@ -1,18 +1,18 @@
 import { Fragment } from "react";
 import Head from "next/head";
 import AppContainer from "components/containers/app/AppContainer";
-import SnackbarSampleContainer from "components/containers/snackbar/SnackbarSampleContainer";
+import RcTreeSampleContainer from "components/containers/rctree/RcTreeSampleContainer";
 
-console.log("pages/snackbar.js");
+console.log("pages/rctree/index.js");
 
-export default function Snackbar() {
+export default function RcTree() {
   return (
     <Fragment>
       <Head>
-        <title>SnackbarSample</title>
+        <title>RcTreeSample</title>
       </Head>
       <AppContainer>
-        <SnackbarSampleContainer />
+        <RcTreeSampleContainer />
       </AppContainer>
     </Fragment>
   );

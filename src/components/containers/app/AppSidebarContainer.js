@@ -49,6 +49,13 @@ export default function AppSidebarContainer() {
     router.push("/util");
   };
 
+  /**
+   * Routing 페이지로 이동
+   */
+  const goRoutingPage = () => {
+    router.push("/routing");
+  };
+
   return (
     <AppSidebar
       onAgGridClick={goAgGridPage}
@@ -57,6 +64,7 @@ export default function AppSidebarContainer() {
       onTreeClick={goTreePage}
       onRcTreeClick={goRcTreePage}
       onUtilClick={goUtilPage}
+      onRoutingClick={goRoutingPage}
     />
   );
 }

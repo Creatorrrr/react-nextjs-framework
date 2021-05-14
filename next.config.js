@@ -14,13 +14,4 @@ module.exports = withTM({
       },
     ];
   },
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/aggrid",
-        permanent: true,
-      },
-    ];
-  },
 });
