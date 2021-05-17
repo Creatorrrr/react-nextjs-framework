@@ -13,9 +13,9 @@ import locales from "locales";
 import SnackbarAlert from "components/commons/snackbar/SnackbarAlert";
 import NextReduxWrapper from "stores";
 import { IS_DEV } from "constants/global-constants";
+import CenterCircularProgress from "components/commons/progress/CenterCircularProgress";
 import "@fontsource/roboto";
 import "@fontsource/noto-sans-kr";
-import CenterCircularProgress from "components/commons/progress/CenterCircularProgress";
 
 i18n
   .use(LanguageDetector)
