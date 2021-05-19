@@ -36,7 +36,7 @@ export default function LoginFormContainer() {
 
       if (HttpStatus.OK === response.data.status) {
         // 쿠키에  토큰값 저장
-        CommonUtil.setCookie("token", response.data.result.token);
+        CommonUtil.setCookie("token", response.data.result.token, { sameSite: "None", secure: true });
 
         // session store에 사용자 정보 저장
         const user = response.data.result;
