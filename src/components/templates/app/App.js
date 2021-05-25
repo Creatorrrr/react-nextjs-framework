@@ -1,4 +1,3 @@
-import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppHeaderContainer from "components/containers/app/AppHeaderContainer";
@@ -14,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
 }));
-  
+
 export default function App({ children }) {
   const classes = useStyles();
 

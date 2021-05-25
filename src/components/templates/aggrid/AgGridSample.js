@@ -2,10 +2,11 @@ import { AgGridReact } from "ag-grid-react/lib/agGridReact";
 import { AgGridColumn } from "ag-grid-react/lib/agGridColumn";
 import { format, parseISO } from "date-fns";
 import fileSize from "filesize";
-import IconFolder from "assets/imgs/icon-folder.svg";
-import IconFile from "assets/imgs/icon-file.svg";
+import ContentIcon from "components/commons/icon/ContentIcon";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
+import { forwardRef, Fragment, useEffect, useImperativeHandle, useRef, useState } from "react";
+import ContextMenuLayout from "@/components/commons/contextmenu/ContextMenuLayout";
 
 console.debug("AgGridSample.js");
 
@@ -14,20 +15,41 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
   const defaultColDef = {
     resizable: true,
     sortable: true,
+    rowSelection: "multiple",
   };
 
   // 렌더러 설정
   const frameworkComponents = {
-    nameRenderer: (props) => (
-      <div>
-        {props.data.nodeTypeCode === "FOLDER" ? (
-          <IconFolder style={{ height: 20 }} />
-        ) : props.data.nodeTypeCode === "DOCUMENT" ? (
-          <IconFile style={{ height: 20 }} />
-        ) : null}
-        <span>{props.valueFormatted ? props.valueFormatted : props.value}</span>
-      </div>
+    nameRenderer: ({ data, valueFormatted, value }) => (
+      <Fragment>
+        <ContentIcon nodeTypeCode={data.nodeTypeCode} />
+        <span>{valueFormatted ? valueFormatted : value}</span>
+      </Fragment>
     ),
+    nameEditor: forwardRef((props, ref) => {
+      const [value, setValue] = useState(props.value);
+      const refInput = useRef(null);
+
+      useEffect(() => {
+        setTimeout(() => refInput.current.focus());
+      }, []);
+
+      useImperativeHandle(ref, () => ({
+        getValue: () => value,
+      }));
+
+      // 값 변경
+      const onChange = (event) => {
+        setValue(event.target.value);
+      };
+
+      return (
+        <Fragment>
+          <ContentIcon nodeTypeCode={data.nodeTypeCode} />
+          <input type="text" ref={refInput} value={value} onChange={onChange} style={{ width: "100%" }} />
+        </Fragment>
+      );
+    }),
   };
 
   // 컬럼 정의
@@ -38,7 +60,10 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
       flex: 1,
       width: 850,
       cellRenderer: "nameRenderer",
-      onCellClicked: onNameClick,
+      cellEditor: "nameEditor",
+      // onCellClicked: onNameClick,
+      editable: true,
+      suppressClickEdit: true,
     },
     {
       headerName: "상태",
@@ -119,12 +144,63 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
   ];
 
   return (
-    <div className="ag-theme-balham" style={{ height: 400 }}>
-      <AgGridReact frameworkComponents={frameworkComponents} defaultColDef={defaultColDef} onGridReady={onGridReady} rowData={rowData}>
-        {columnDefs.map((columnDef, index) => (
-          <AgGridColumn key={index} {...columnDef}></AgGridColumn>
-        ))}
-      </AgGridReact>
-    </div>
+    <ContextMenuLayout
+      menus={[
+        {
+          name: "메뉴1",
+          onClick: () => {
+            alert("메뉴1클릭");
+          },
+        },
+        {
+          name: "메뉴2",
+          children: [
+            {
+              name: "메뉴2하위1",
+              onClick: () => {
+                alert("메뉴2하위1클릭");
+              },
+            },
+            {
+              name: "메뉴2하위2",
+              onClick: () => {
+                alert("메뉴2하위2클릭");
+              },
+            },
+            {
+              name: "메뉴2하위3",
+              children: [
+                {
+                  name: "메뉴2하위3하위1",
+                  onClick: () => {
+                    alert("메뉴2하위3하위1클릭");
+                  },
+                },
+                {
+                  name: "메뉴2하위3하위2",
+                  onClick: () => {
+                    alert("메뉴2하위3하위2클릭");
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "메뉴3",
+          onClick: () => {
+            alert("메뉴3클릭");
+          },
+        },
+      ]}
+    >
+      <div className="ag-theme-balham" style={{ height: 400 }}>
+        <AgGridReact frameworkComponents={frameworkComponents} defaultColDef={defaultColDef} onGridReady={onGridReady} rowData={rowData}>
+          {columnDefs.map((columnDef, index) => (
+            <AgGridColumn key={index} {...columnDef}></AgGridColumn>
+          ))}
+        </AgGridReact>
+      </div>
+    </ContextMenuLayout>
   );
 }
