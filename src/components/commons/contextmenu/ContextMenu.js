@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContextMenu({ menus, open, onClose, anchorEl, posX, posY }) {
+export default function ContextMenu({ menus, open, onClose, anchorEl }) {
   const classes = useStyles();
   const [focused, setFocused] = useState(null);
 
@@ -70,7 +70,7 @@ export default function ContextMenu({ menus, open, onClose, anchorEl, posX, posY
       >
         {({ TransitionProps }) => (
           <Grow {...TransitionProps}>
-            <Paper className={classes.paper} elevation={5} style={{ position: "fixed", left: !anchorEl ? posX : 0, top: !anchorEl ? posY : 0 }}>
+            <Paper className={classes.paper} elevation={5}>
               <ClickAwayListener onClickAway={closeMenu}>
                 <MenuList autoFocusItem={open} id="menu-list-grow">
                   {menus.map((menu, index) => (
@@ -100,10 +100,10 @@ export default function ContextMenu({ menus, open, onClose, anchorEl, posX, posY
         <ContextMenu
           menus={focused.menu.children}
           open={true}
+          anchorEl={focused.element}
           onClose={() => {
             closeMenu(menu);
           }}
-          anchorEl={focused.element}
         />
       ) : null}
     </Fragment>
