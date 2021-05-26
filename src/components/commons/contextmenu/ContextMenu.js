@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 import { ClickAwayListener, Grow, makeStyles, MenuItem, MenuList, Paper, Popper } from "@material-ui/core";
 import { ArrowRight } from "@material-ui/icons";
 import { Fragment } from "react";
@@ -14,9 +14,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContextMenu({ menus, open, onClose, anchorEl }) {
+const ContextMenu = forwardRef(function ({ menus, open, onClose, anchorEl }, ref) {
   const classes = useStyles();
   const [focused, setFocused] = useState(null);
+
+  useImperativeHandle(ref, () => ({
+    closeMenu,
+  }));
 
   /**
    * 하위 메뉴 열기
@@ -98,14 +102,17 @@ export default function ContextMenu({ menus, open, onClose, anchorEl }) {
       </Popper>
       {focused?.menu?.children ? (
         <ContextMenu
+          ref={ref}
           menus={focused.menu.children}
-          open={true}
           anchorEl={focused.element}
           onClose={() => {
-            closeMenu(menu);
+            closeMenu();
           }}
+          open
         />
       ) : null}
     </Fragment>
   );
-}
+});
+
+export default ContextMenu;

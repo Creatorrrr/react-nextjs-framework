@@ -7,6 +7,7 @@ export default function ContextMenuLayout({ children, menus }) {
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState(null);
   const posRef = useRef(null);
+  const contextMenuRef = useRef(null);
 
   /**
    * 컨텍스트 메뉴 열기
@@ -17,6 +18,7 @@ export default function ContextMenuLayout({ children, menus }) {
       x: event.clientX,
       y: event.clientY,
     });
+    contextMenuRef.current.closeMenu();
     setOpen(true);
   };
 
@@ -31,7 +33,7 @@ export default function ContextMenuLayout({ children, menus }) {
     <div onContextMenu={openContextMenu}>
       {children}
       <div ref={posRef} style={{ position: "fixed", left: pos?.x, top: pos?.y }} />
-      <ContextMenu menus={menus} open={open} anchorEl={posRef.current} onClose={closeContextMenu} />
+      <ContextMenu ref={contextMenuRef} menus={menus} open={open} anchorEl={posRef.current} onClose={closeContextMenu} />
     </div>
   );
 }
