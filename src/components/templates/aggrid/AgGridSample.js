@@ -3,10 +3,11 @@ import { AgGridColumn } from "ag-grid-react/lib/agGridColumn";
 import { format, parseISO } from "date-fns";
 import fileSize from "filesize";
 import ContentIcon from "components/commons/icon/ContentIcon";
-import "ag-grid-community/dist/styles/ag-grid.css";
-import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import { forwardRef, Fragment, useEffect, useImperativeHandle, useRef, useState } from "react";
 import ContextMenuLayout from "@/components/commons/contextmenu/ContextMenuLayout";
+import DefaultHeader from "@/components/commons/aggrid/DefaultHeader";
+import "ag-grid-community/dist/styles/ag-grid.css";
+import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
 console.debug("AgGridSample.js");
 
@@ -20,6 +21,7 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
 
   // 렌더러 설정
   const frameworkComponents = {
+    agColumnHeader: DefaultHeader,
     nameRenderer: ({ data, valueFormatted, value }) => (
       <Fragment>
         <ContentIcon nodeTypeCode={data.nodeTypeCode} />
@@ -61,9 +63,8 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
       width: 850,
       cellRenderer: "nameRenderer",
       cellEditor: "nameEditor",
-      // onCellClicked: onNameClick,
+      onCellClicked: onNameClick,
       editable: true,
-      suppressClickEdit: true,
     },
     {
       headerName: "상태",

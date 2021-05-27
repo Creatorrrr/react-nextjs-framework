@@ -1,4 +1,3 @@
-import "react-app-polyfill/ie11";
 import Head from "next/head";
 import { Fragment } from "react";
 import { createMuiTheme } from "@material-ui/core";
