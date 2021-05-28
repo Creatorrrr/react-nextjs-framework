@@ -3,10 +3,10 @@ import httpUtil from "utils/http-util";
 console.debug("node-api.js");
 
 const NodeApi = {
-  async getNodeList(params) {
-    return await httpUtil.send({
+  async getNodeList({ params, headers }) {
+    return await httpUtil.get({
       url: `/api/nodes`,
-      method: "GET",
+      headers,
       params: {
         nodeTypeCodes: JSON.stringify(params.nodeTypeCodes),
         field: params.field,
@@ -25,7 +25,7 @@ const NodeApi = {
       },
     });
   },
-  async getNodeChildren(params, headers) {
+  async getNodeChildren({ params, headers }) {
     return await httpUtil.get({
       url: `/api/nodes/${encodeURIComponent(params.nodeId)}/children`,
       headers,

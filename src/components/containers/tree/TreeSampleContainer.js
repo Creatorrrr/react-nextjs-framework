@@ -1,7 +1,7 @@
 import NodeApi from "apis/node-api";
 import { HttpStatus } from "constants/http-constants";
 import { useSelector } from "react-redux";
-import Async from "components/commons/async/Async";
+import { Async } from "react-async";
 import CenterCircularProgress from "components/commons/progress/CenterCircularProgress";
 import SnackbarMessage from "components/commons/snackbar/SnackbarMessage";
 import TreeSample from "components/templates/tree/TreeSample";
@@ -22,15 +22,20 @@ export default function TreeSampleContainer() {
         mode: "jstree-path",
       }}
       watch={user}
-      onSuccess={(data) => {
-        return HttpStatus.OK === data.data.status ? (
-          <TreeSample nodes={data.data.result} />
-        ) : (
-          <SnackbarMessage severity="error" title="Error" message={`에러: ${data.data.message}`} />
-        );
-      }}
-      onError={(error) => <SnackbarMessage severity="error" title="Error" message={`에러: ${error.message}`} />}
-      onLoading={() => <CenterCircularProgress />}
-    />
+    >
+      <Async.Fulfilled>
+        {(data) =>
+          HttpStatus.OK === data.data.status ? (
+            <TreeSample nodes={data.data.result} />
+          ) : (
+            <SnackbarMessage severity="error" title="Error" message={`에러: ${data.data.message}`} />
+          )
+        }
+      </Async.Fulfilled>
+      <Async.Rejected>{(error) => <SnackbarMessage severity="error" title="Error" message={`에러: ${error.message}`} />}</Async.Rejected>
+      <Async.Loading>
+        <CenterCircularProgress />
+      </Async.Loading>
+    </Async>
   );
 }

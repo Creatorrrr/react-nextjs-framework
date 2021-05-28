@@ -11,7 +11,7 @@ import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
 console.debug("AgGridSample.js");
 
-export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
+export default function AgGridSample({ onGridReady, rowData, onNameClick, onSortClick, onFilterClick }) {
   // 컬럼 기본값 정의
   const defaultColDef = {
     resizable: true,
@@ -21,7 +21,7 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
 
   // 렌더러 설정
   const frameworkComponents = {
-    agColumnHeader: (props) => <DefaultHeader {...props} onSortClick={clickSort} onFilterClick={clickFilter} />,
+    agColumnHeader: (props) => <DefaultHeader {...props} onSortClick={onSortClick} onFilterClick={onFilterClick} />,
     nameRenderer: ({ data, valueFormatted, value }) => (
       <Fragment>
         <ContentIcon nodeTypeCode={data.nodeTypeCode} />
@@ -144,20 +144,6 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
       width: 80,
     },
   ];
-
-  /**
-   * 정렬 클릭
-   */
-  const clickSort = (direction) => {
-    alert("clickSort " + direction);
-  };
-
-  /**
-   * 필터 클릭
-   */
-  const clickFilter = (props) => {
-    alert("clickFilter " + props.displayName);
-  };
 
   return (
     <ContextMenuLayout

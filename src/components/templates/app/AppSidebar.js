@@ -5,7 +5,16 @@ import { MoveToInbox, Mail, AccountTree } from "@material-ui/icons";
 
 console.debug("AppSidebar.js");
 
-export default function AppSidebar({ onAgGridClick, onSnackbarClick, onDialogClick, onTreeClick, onRcTreeClick, onUtilClick, onRoutingClick }) {
+export default function AppSidebar({
+  onAgGridClick,
+  onDataGridClick,
+  onSnackbarClick,
+  onDialogClick,
+  onTreeClick,
+  onRcTreeClick,
+  onUtilClick,
+  onRoutingClick,
+}) {
   return (
     <Sidebar>
       <List>
@@ -14,6 +23,12 @@ export default function AppSidebar({ onAgGridClick, onSnackbarClick, onDialogCli
             <Mail />
           </ListItemIcon>
           <ListItemText>AgGrid</ListItemText>
+        </ListItem>
+        <ListItem button onClick={onDataGridClick}>
+          <ListItemIcon>
+            <Mail />
+          </ListItemIcon>
+          <ListItemText>DataGrid</ListItemText>
         </ListItem>
         <ListItem button onClick={onSnackbarClick}>
           <ListItemIcon>

@@ -30,8 +30,10 @@ export default function LoginFormContainer() {
   const login = async () => {
     try {
       const response = await LoginApi.login({
-        loginId: loginId,
-        pwd: password,
+        params: {
+          loginId: loginId,
+          pwd: password,
+        },
       });
 
       if (HttpStatus.OK === response.data.status) {

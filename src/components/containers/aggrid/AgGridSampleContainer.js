@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { Async } from "react-async";
 import NodeApi from "apis/node-api";
 import AgGridSample from "components/templates/aggrid/AgGridSample";
-import Async from "components/commons/async/Async";
 import { HttpStatus } from "constants/http-constants";
 import SnackbarMessage from "components/commons/snackbar/SnackbarMessage";
 import CommonUtil from "utils/common-util";
@@ -13,6 +13,12 @@ console.debug("AgGridSampleContainer.js");
 export default function AgGridSampleContainer({ nodeList }) {
   const user = useSelector((state) => state.session.user);
   const [nodeId, setNodeId] = useState(user?.group?.nodeId);
+  const [orders, setOrders] = useState([
+    { field: "useYn", direction: "asc" },
+    { field: "sortKey", direction: "asc" },
+    { field: "dkName", direction: "asc" },
+    { field: "regDate", direction: "asc" },
+  ]);
 
   const setGridApi = useState(null)[1];
   const setGridColumnApi = useState(null)[1];
@@ -46,32 +52,52 @@ export default function AgGridSampleContainer({ nodeList }) {
     }
   };
 
+  /**
+   * 정렬 클릭
+   */
+  const clickSort = (direction) => {
+    alert("clickSort " + direction);
+  };
+
+  /**
+   * 필터 클릭
+   */
+  const clickFilter = (props) => {
+    alert("clickFilter " + props.displayName);
+  };
+
   return nodeId ? (
     <Async
       promiseFn={NodeApi.getNodeChildren}
       params={{
         nodeId,
         nodeTypeCodes: ["FOLDER", "DOCUMENT", "TRASH", "DIRECTORY"],
-        orders: [
-          { field: "useYn", direction: "asc" },
-          { field: "sortKey", direction: "asc" },
-          { field: "dkName", direction: "asc" },
-          { field: "regDate", direction: "asc" },
-        ],
+        orders: orders,
         mode: "detail",
       }}
       watch={nodeId}
-      onSuccess={(data) => {
-        return HttpStatus.OK === data.data.status ? (
-          <AgGridSample onGridReady={onGridReady} rowData={data.data.result.list} onNameClick={changeNodeId} />
-        ) : (
-          <SnackbarMessage severity="error" title="Error" message={`에러: ${data.data.message}`} />
-        );
-      }}
-      onError={(error) => <SnackbarMessage severity="error" title="Error" message={`에러: ${error.message}`} />}
-      onLoading={() => <CenterCircularProgress />}
-    />
+    >
+      <Async.Fulfilled>
+        {(data) =>
+          HttpStatus.OK === data.data.status ? (
+            <AgGridSample
+              onGridReady={onGridReady}
+              rowData={data.data.result.list}
+              onNameClick={changeNodeId}
+              onSortClick={clickSort}
+              onFilterClick={clickFilter}
+            />
+          ) : (
+            <SnackbarMessage severity="error" title="Error" message={`에러: ${data.data.message}`} />
+          )
+        }
+      </Async.Fulfilled>
+      <Async.Rejected>{(error) => <SnackbarMessage severity="error" title="Error" message={`에러: ${error.message}`} />}</Async.Rejected>
+      <Async.Loading>
+        <CenterCircularProgress />
+      </Async.Loading>
+    </Async>
   ) : (
-    <AgGridSample onGridReady={onGridReady} rowData={nodeList} onNameClick={changeNodeId} />
+    <AgGridSample onGridReady={onGridReady} rowData={nodeList} onNameClick={changeNodeId} onSortClick={clickSort} onFilterClick={clickFilter} />
   );
 }

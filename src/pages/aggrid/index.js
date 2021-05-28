@@ -15,14 +15,14 @@ export async function getServerSideProps({ req }) {
   const parsedCookie = cookie.parse(req.headers.cookie || "");
   const token = parsedCookie.token;
 
-  const header = {};
-  if (token) header.Authorization = token;
+  const headers = {};
+  if (token) headers.Authorization = token;
 
   let unauthorized = false;
 
   let user;
   try {
-    const response = await LoginApi.session({ mode: "detail" }, header);
+    const response = await LoginApi.session({ params: { mode: "detail" }, headers });
     user = response.data.result;
   } catch (e) {
     unauthorized = true;
@@ -30,8 +30,8 @@ export async function getServerSideProps({ req }) {
 
   let nodeList = [];
   try {
-    const response = await NodeApi.getNodeChildren(
-      {
+    const response = await NodeApi.getNodeChildren({
+      params: {
         nodeId: user?.group?.nodeId,
         nodeTypeCodes: ["FOLDER", "DOCUMENT", "TRASH", "DIRECTORY"],
         orders: [
@@ -42,8 +42,8 @@ export async function getServerSideProps({ req }) {
         ],
         mode: "detail",
       },
-      header,
-    );
+      headers,
+    });
     nodeList = response.data.result.list;
   } catch (e) {
     console.error(e);

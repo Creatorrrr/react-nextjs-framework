@@ -1,12 +1,11 @@
-import NodeApi from "apis/node-api";
-import { HttpStatus } from "constants/http-constants";
-import * as React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import Async from "components/commons/async/Async";
+import { Async } from "react-async";
 import CenterCircularProgress from "components/commons/progress/CenterCircularProgress";
 import SnackbarMessage from "components/commons/snackbar/SnackbarMessage";
 import DataGridSample from "components/templates/datagrid/DataGridSample";
+import NodeApi from "apis/node-api";
+import { HttpStatus } from "constants/http-constants";
 
 export default function DataGridSampleContainer() {
   const user = useSelector((state) => state.session.user);
@@ -34,22 +33,27 @@ export default function DataGridSampleContainer() {
         mode: "detail",
       }}
       watch={nodeId}
-      onSuccess={(data) => {
-        return HttpStatus.OK === data.data.status ? (
-          <DataGridSample
-            rows={data.data.result.list.map((item) => ({
-              id: item.nodeId,
-              ...item,
-            }))}
-            pageSize={10}
-            onNameClick={changeNodeId}
-          />
-        ) : (
-          <SnackbarMessage severity="error" title="Error" message={`에러: ${data.data.message}`} />
-        );
-      }}
-      onError={(error) => <SnackbarMessage severity="error" title="Error" message={`에러: ${error.message}`} />}
-      onLoading={() => <CenterCircularProgress />}
-    />
+    >
+      <Async.Fulfilled>
+        {(data) =>
+          HttpStatus.OK === data.data.status ? (
+            <DataGridSample
+              rows={data.data.result.list.map((item) => ({
+                id: item.nodeId,
+                ...item,
+              }))}
+              pageSize={10}
+              onNameClick={changeNodeId}
+            />
+          ) : (
+            <SnackbarMessage severity="error" title="Error" message={`에러: ${data.data.message}`} />
+          )
+        }
+      </Async.Fulfilled>
+      <Async.Rejected>{(error) => <SnackbarMessage severity="error" title="Error" message={`에러: ${error.message}`} />}</Async.Rejected>
+      <Async.Loading>
+        <CenterCircularProgress />
+      </Async.Loading>
+    </Async>
   );
 }
