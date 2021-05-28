@@ -6,9 +6,10 @@
 
 .text {
   flex-grow: 1;
+  display: flex;
   line-height: 2;
 }
 
-.filterIcon {
+.icon {
   width: 0.7em !important;
 }

@@ -21,7 +21,7 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
 
   // 렌더러 설정
   const frameworkComponents = {
-    agColumnHeader: ({ displayName }) => <DefaultHeader text={displayName} onFilterClick={clickFilter} />,
+    agColumnHeader: (props) => <DefaultHeader {...props} onSortClick={clickSort} onFilterClick={clickFilter} />,
     nameRenderer: ({ data, valueFormatted, value }) => (
       <Fragment>
         <ContentIcon nodeTypeCode={data.nodeTypeCode} />
@@ -95,7 +95,7 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
     {
       headerName: "수정일",
       field: "modDate",
-      width: 100,
+      width: 80,
       valueFormatter: (params) => format(parseISO(params.value), "yyyy-MM-dd"),
       cellStyle: () => ({ textAlign: "center" }),
     },
@@ -124,7 +124,7 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
     {
       headerName: "생성일",
       field: "regDate",
-      width: 100,
+      width: 80,
       valueFormatter: (params) => format(parseISO(params.value), "yyyy-MM-dd"),
       cellStyle: () => ({ textAlign: "center" }),
     },
@@ -136,7 +136,7 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
     {
       headerName: "확장자",
       field: "extension",
-      width: 100,
+      width: 80,
     },
     {
       headerName: "분류",
@@ -146,10 +146,17 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
   ];
 
   /**
+   * 정렬 클릭
+   */
+  const clickSort = (direction) => {
+    alert("clickSort " + direction);
+  };
+
+  /**
    * 필터 클릭
    */
   const clickFilter = (props) => {
-    alert("clickFilter " + props.text);
+    alert("clickFilter " + props.displayName);
   };
 
   return (
