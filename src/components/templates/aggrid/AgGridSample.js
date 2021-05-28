@@ -21,7 +21,7 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
 
   // 렌더러 설정
   const frameworkComponents = {
-    agColumnHeader: DefaultHeader,
+    agColumnHeader: ({ displayName }) => <DefaultHeader text={displayName} onFilterClick={clickFilter} />,
     nameRenderer: ({ data, valueFormatted, value }) => (
       <Fragment>
         <ContentIcon nodeTypeCode={data.nodeTypeCode} />
@@ -65,6 +65,7 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
       cellEditor: "nameEditor",
       onCellClicked: onNameClick,
       editable: true,
+      filter: true,
     },
     {
       headerName: "상태",
@@ -74,17 +75,17 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
     {
       headerName: "작성자",
       field: "creator.name",
-      width: 80,
+      width: 100,
     },
     {
       headerName: "Feedback",
       field: "feedback",
-      width: 80,
+      width: 100,
     },
     {
       headerName: "결재정보",
       field: "approval",
-      width: 80,
+      width: 100,
     },
     {
       headerName: "최종결재자",
@@ -130,12 +131,12 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
     {
       headerName: "태그",
       field: "tag",
-      width: 80,
+      width: 100,
     },
     {
       headerName: "확장자",
       field: "extension",
-      width: 80,
+      width: 100,
     },
     {
       headerName: "분류",
@@ -143,6 +144,13 @@ export default function AgGridSample({ onGridReady, rowData, onNameClick }) {
       width: 80,
     },
   ];
+
+  /**
+   * 필터 클릭
+   */
+  const clickFilter = (props) => {
+    alert("clickFilter " + props.text);
+  };
 
   return (
     <ContextMenuLayout

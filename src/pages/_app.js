@@ -15,6 +15,7 @@ import { IS_DEV } from "constants/global-constants";
 import CenterCircularProgress from "components/commons/progress/CenterCircularProgress";
 import "@fontsource/roboto";
 import "@fontsource/noto-sans-kr";
+import "@/assets/styles/global.css";
 
 i18n
   .use(LanguageDetector)

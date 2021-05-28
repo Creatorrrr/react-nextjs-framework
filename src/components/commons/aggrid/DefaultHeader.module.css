@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.text {
+  flex-grow: 1;
+  line-height: 2;
+}
+
+.filterIcon {
+  width: 0.7em !important;
+}
