@@ -74,11 +74,11 @@ export default function UtilSampleContainer() {
       </div>
       <div>파일 사이즈: {filesize(fileSize)}</div>
       <Divider className={styles.divider} />
-      {/* <div>
+      <div>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker disableToolbar variant="inline" format="MM/dd/yyyy" margin="normal" label="날짜 선택" value={date} onChange={changeDate} />
+          <KeyboardDatePicker variant="inline" format="MM/dd/yyyy" margin="normal" label="날짜 선택" value={date} onChange={changeDate} disableToolbar />
         </MuiPickersUtilsProvider>
-      </div> */}
+      </div>
       <div>날짜: {format(date, "MMMM Do yyyy, h:mm:ss a")}</div>
       <div>날짜 (현재 초): {sec}</div>
       <div>날짜 (현재 밀리초): {ms}</div>

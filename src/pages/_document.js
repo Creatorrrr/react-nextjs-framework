@@ -1,5 +1,5 @@
-import { Fragment } from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { Fragment } from "react";
 import { ServerStyleSheet } from "styled-components";
 import { ServerStyleSheets } from "@material-ui/styles";
 
