@@ -6,7 +6,6 @@ console.debug("ContextMenuLayout.js");
 export default function ContextMenuLayout({ children, menus }) {
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState(null);
-  const posRef = useRef(null);
   const contextMenuRef = useRef(null);
 
   /**
@@ -32,8 +31,7 @@ export default function ContextMenuLayout({ children, menus }) {
   return (
     <div onContextMenu={openContextMenu}>
       {children}
-      <div ref={posRef} style={{ position: "fixed", left: pos?.x, top: pos?.y }} />
-      <ContextMenu ref={contextMenuRef} menus={menus} open={open} anchorEl={posRef.current} onClose={closeContextMenu} />
+      <ContextMenu ref={contextMenuRef} menus={menus} open={open} posX={pos?.x} posY={pos?.y} onClose={closeContextMenu} />
     </div>
   );
 }

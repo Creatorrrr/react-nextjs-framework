@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { ClickAwayListener, Grow, makeStyles, MenuItem, MenuList, Paper, Popper } from "@material-ui/core";
 import { ArrowRight } from "@material-ui/icons";
 import { Fragment } from "react";
@@ -14,9 +14,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ContextMenu = forwardRef(function ({ menus, open, onClose, anchorEl }, ref) {
+const ContextMenu = forwardRef(function ({ menus, open, onClose, anchorEl, posX, posY }, ref) {
   const classes = useStyles();
   const [focused, setFocused] = useState(null);
+  const posRef = useRef(null);
 
   useImperativeHandle(ref, () => ({
     closeMenu,
@@ -54,10 +55,11 @@ const ContextMenu = forwardRef(function ({ menus, open, onClose, anchorEl }, ref
 
   return (
     <Fragment>
+      {!anchorEl && <div ref={posRef} style={{ position: "fixed", left: posX, top: posY }} />}
       <Popper
         className={classes.popper}
         open={open}
-        anchorEl={anchorEl}
+        anchorEl={anchorEl || posRef.current}
         placement={"right-start"}
         modifiers={{
           flip: {
