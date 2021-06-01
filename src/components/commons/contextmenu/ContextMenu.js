@@ -55,64 +55,65 @@ const ContextMenu = forwardRef(function ({ menus, open, onClose, anchorEl, posX,
 
   return (
     <Fragment>
-      {!anchorEl && <div ref={posRef} style={{ position: "fixed", left: posX, top: posY }} />}
-      <Popper
-        className={classes.popper}
-        open={open}
-        anchorEl={anchorEl || posRef.current}
-        placement={"right-start"}
-        modifiers={{
-          flip: {
-            enabled: false,
-          },
-          preventOverflow: {
-            enabled: true,
-            boundariesElement: "viewport",
-          },
-        }}
-        transition
-        disablePortal
-        keepMounted
-      >
-        {({ TransitionProps }) => (
-          <Grow {...TransitionProps}>
-            <Paper className={classes.paper} elevation={5}>
-              <ClickAwayListener onClickAway={closeMenu}>
-                <MenuList autoFocusItem={open} id="menu-list-grow">
-                  {menus.map((menu, index) => (
-                    <MenuItem
-                      key={index}
-                      onClick={(event) => {
-                        clickMenu(event, menu);
-                      }}
-                      onMouseEnter={(event) => {
-                        setFocusedMenu(event, menu);
-                      }}
-                    >
-                      <span style={{ flexGrow: 1 }}>
-                        {menu.name}
-                        {menu.opened}
-                      </span>
-                      {menu.children ? <ArrowRight /> : null}
-                    </MenuItem>
-                  ))}
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </Grow>
-        )}
-      </Popper>
-      {focused?.menu?.children ? (
-        <ContextMenu
-          ref={ref}
-          menus={focused.menu.children}
-          anchorEl={focused.element}
-          onClose={() => {
-            closeMenu();
+      <div ref={posRef} style={{ position: "fixed", left: posX, top: posY }}>
+        <Popper
+          className={classes.popper}
+          open={open}
+          anchorEl={anchorEl || posRef.current}
+          placement={"right-start"}
+          modifiers={{
+            flip: {
+              enabled: false,
+            },
+            preventOverflow: {
+              enabled: true,
+              boundariesElement: "viewport",
+            },
           }}
-          open
-        />
-      ) : null}
+          transition
+          disablePortal
+          keepMounted
+        >
+          {({ TransitionProps }) => (
+            <Grow {...TransitionProps}>
+              <Paper className={classes.paper} elevation={5}>
+                <ClickAwayListener onClickAway={closeMenu}>
+                  <MenuList autoFocusItem={open} id="menu-list-grow">
+                    {menus.map((menu, index) => (
+                      <MenuItem
+                        key={index}
+                        onClick={(event) => {
+                          clickMenu(event, menu);
+                        }}
+                        onMouseEnter={(event) => {
+                          setFocusedMenu(event, menu);
+                        }}
+                      >
+                        <span style={{ flexGrow: 1 }}>
+                          {menu.name}
+                          {menu.opened}
+                        </span>
+                        {menu.children ? <ArrowRight /> : null}
+                      </MenuItem>
+                    ))}
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+        {focused?.menu?.children ? (
+          <ContextMenu
+            ref={ref}
+            menus={focused.menu.children}
+            anchorEl={focused.element}
+            onClose={() => {
+              closeMenu();
+            }}
+            open
+          />
+        ) : null}
+      </div>
     </Fragment>
   );
 });
