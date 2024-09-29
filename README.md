@@ -1,6 +1,6 @@
-# 그룹사 통합문서용 React Framework (Next.js 적용)
+# React Framework (Next.js 적용)
 
-그룹사 통합문서 프로젝트의 프론트엔드 프레임워크 기본 구성
+React를 활용한 프론트엔드 프레임워크 기본 구성
 
 ## 실행
 
